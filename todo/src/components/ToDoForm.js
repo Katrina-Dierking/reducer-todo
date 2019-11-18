@@ -1,6 +1,5 @@
-import React, {useState, useReducer} from 'react';
+import React, {useState} from 'react';
 
-// import {tasks, reducer} from '../reducers/toDoReducer';
 
 const ToDoForm = ({dispatch}) => {
     const [item, setItem] = useState('');
