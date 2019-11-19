@@ -1,48 +1,20 @@
-export const initialState = [
-    {
-    item: "Reorganize Office",
+const initialState = [{
+    item: 'Hang magnetic board',
     completed: false,
     id: 1
- },
-
- {
-    item: 'Clean Out Truck',
+},
+{
+    item: 'Cut out magnetic pieces',
     completed: false,
-    id: 2,
-    
-  },
-  {
-    name: 'Plan Disney Trip',
-    id: 3,
-    completed: false
-  },
- 
-];
+    id:2
+}]
+
+
 
 
  export const reducer = (state, action) => {
      switch(action.type) {
-        case 'ADD_NEW_TASK':
-            return [ ...state,
-                {
-                item: action.payload,
-                completed:false,
-                id: Date.now(),
-                }];
-    
-        case 'TOGGLE_COMPLETED':
-            return state.map(initialState => {
-                if (item.id === action.payload) {
-                return { ...initialState, 
-                 completed: !item.completed };
-            
-                }
-                return tasks;
-                });
-
-        case 'CLEAR_COMPLETED':
-            return state.filter (tasks => !tasks.completed);
-
+       
         default:
             return state;
     }
