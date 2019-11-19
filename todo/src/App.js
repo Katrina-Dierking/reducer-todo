@@ -1,5 +1,5 @@
 import React from 'react';
-import ToDoList from './components/ToDoList';
+import ToDo from './components/ToDo';
 import './App.css';
 
 
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <ToDoList />
+      <ToDo />
       </header>
     </div>
   );

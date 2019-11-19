@@ -1,6 +1,6 @@
-export const tasks = [
+export const initialState = [
     {
-    item: "Reorganize office",
+    item: "Reorganize Office",
     completed: false,
     id: 1
  },
@@ -12,20 +12,11 @@ export const tasks = [
     
   },
   {
-    name: 'Write New Book',
+    name: 'Plan Disney Trip',
     id: 3,
     completed: false
   },
-  {
-    name: 'Powerwash House',
-    id: 4,
-    completed: false
-  },
-  {
-    name: 'Take Vacation',
-    id: 5,
-    completed: false
-  }
+ 
 ];
 
 
@@ -40,21 +31,20 @@ export const tasks = [
                 }];
     
         case 'TOGGLE_COMPLETED':
-            return state.map(tasks => {
-                if (tasks.id === action.payload) {
-                return { ...tasks, 
-                 completed: !tasks.completed };
+            return state.map(initialState => {
+                if (item.id === action.payload) {
+                return { ...initialState, 
+                 completed: !item.completed };
             
                 }
-
-             return tasks;
+                return tasks;
                 });
 
         case 'CLEAR_COMPLETED':
             return state.filter (tasks => !tasks.completed);
 
         default:
-            return state
+            return state;
     }
 };
 
