@@ -1,20 +1,19 @@
-import React, {useState, useReducer} from 'react';
+import React from 'react';
 
-export const ToDo = () => {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    console.log(state,dispatch);
-    
+export const ToDo = (props) => {
 
 
-// const handleChanges = e => {
-//     setNewItem(e.target.value);
-// };
     return (
-      
-
-                    
-
-
-            
+        <div> 
+            <h3 className = {props.item.completed ? "Competed To Do" : "To Do"}
+            onClick = {() => {
+                props.dispatch 
+                ({
+                    type: "TOGGLE_ITEM_COMPLETED",
+                    payload: props.item.id
+                })
+            }}
+            >{props.item.item}</h3>
+        </div>
     )
 }

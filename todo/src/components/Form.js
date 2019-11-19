@@ -1,7 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useReduce} from 'react';
+import {initialState, reducer} from './reducers/reducer';
+import ToDo from './components/ToDo';
+
 
 const Form = (props) => {
-const[newItem, setNewItem] = useState()
+const [state, dispatch] = useReducer(reducer, initialState);
+const [newItem, setNewItem] = useState()
 
     return (
         <form>
@@ -27,9 +31,23 @@ const[newItem, setNewItem] = useState()
                     props.dispatch({
                     type: "NEW_ITEM", 
                     payload: newItem})
-                }}
+                    setNewItem('')
+                }} +
                 < ~ Add new task ~ >
             </button>    
+
+            <button 
+                onClick = {() => 
+                dispatch({ type: "deleteCompleted"})}
+                >Delete Completed
+                </button>
+                
+                {state.map(item => {
+                    return <ToDo 
+                        key={item.id} 
+                        item={item} 
+                        dispatch={dispatch}/>
+                })}
         </form>
     );
 }
