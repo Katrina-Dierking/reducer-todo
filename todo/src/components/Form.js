@@ -1,11 +1,34 @@
-import React, {useState, useReduce} from 'react';
-import {initialState, reducer} from './reducers/reducer';
-import ToDo from './components/ToDo';
+import React, {useState, useReducer} from 'react';
+import {task, reducer} from '../reducers/toDoReducer';
 
 
-const Form = (props) => {
-const [state, dispatch] = useReducer(reducer, initialState);
-const [newItem, setNewItem] = useState()
+
+const ToDo = ({task, dispatch}) => {
+    const toggleItemCompleted = () => {
+        dispatch ({
+            type: 'TOGGLE_ITEM_COMPLETED',
+            payload: task.id
+        });
+    };
+    return (
+        <div onClick = {toggleItemCompleted}>
+            <h3>{task.item}</h3>
+        </div>
+    );
+
+};
+
+
+const Form = () => {
+    const [newItem, setNewItem] = useState('')
+    const [state, dispatch] = useReducer (reducer, task);
+
+
+const handleChanges = e => {
+    setNewItem(e.target.value);
+};
+
+
 
     return (
         <form>
@@ -17,37 +40,25 @@ const [newItem, setNewItem] = useState()
                     value={newItem}
                     onChange ={handleChanges}
                     />
-                    
-                        
-                <input 
-                    type="checkbox" 
-                    name="newItemComplete" 
-                    value={newItemCompleted}
-                    />
             </div>
 
-            <button className = "submit-button">
+            <button className = "add-new-item-button">
                 onClick = {() => {
-                    props.dispatch({
-                    type: "NEW_ITEM", 
-                    payload: newItem})
-                    setNewItem('')
-                }} +
-                < ~ Add new task ~ >
+                    dispatch ({
+                        type: 'NEW_ITEM', 
+                        payload: newItem
+                    }); setNewItem ('') }} +
+                      Add new task  
             </button>    
+
+           <ToDo />
 
             <button 
                 onClick = {() => 
-                dispatch({ type: "deleteCompleted"})}
+                dispatch({ type: 'DELETE_COMPLETED' })}
                 >Delete Completed
-                </button>
-                
-                {state.map(item => {
-                    return <ToDo 
-                        key={item.id} 
-                        item={item} 
-                        dispatch={dispatch}/>
-                })}
+            </button>
+
         </form>
     );
 }
