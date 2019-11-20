@@ -7,11 +7,12 @@
   background-color: teal;
   min-height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 30px;
+  font-family: The Wild Hammers;
+  color: black;
 }
 
 /* .App-link {
@@ -20,4 +21,8 @@
 
 .task-button {
   border-radius: 10%;
+}
+
+.completed {
+  text-decoration: line-through; 
 }

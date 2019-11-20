@@ -1,58 +1,40 @@
-import React, {useState, useReducer} from 'react';
-import {task, reducer} from '../reducers/toDoReducer';
+import React, {useState} from 'react';
+// import {task} from '../reducers/toDoReducer';
 
 
+const Form = ({dispatch}) => {
+    const [newTask, setNewTask] = useState('')
 
-const ToDo = ({task, dispatch}) => {
-    const toggleItemCompleted = () => {
-        dispatch ({
-            type: 'TOGGLE_ITEM_COMPLETED',
-            payload: task.id
-        });
+
+    const handleChanges = e => {
+        e.preventDefault()
+        setNewTask(e.target.value);
     };
-    return (
-        <div onClick = {toggleItemCompleted}>
-            <h3>{task.item}</h3>
-        </div>
-    );
 
-};
+    const handleSubmit = e => {
+        e.preventDefault()
+        dispatch({type: 'NEW_TASK', payload: newTask}) 
+        setNewTask('');
+    }
 
-
-const Form = () => {
-    const [newItem, setNewItem] = useState('')
-    const [state, dispatch] = useReducer (reducer, task);
-
-
-const handleChanges = e => {
-    setNewItem(e.target.value);
-};
 
 
 
     return (
-        <form>
-            <div className="new-item-and-complete"> 
+        
+        <form onSubmit = {handleSubmit}>
+            <div className="new-item"> 
                 <input
-                    className = "item-input"
+                    className = "task-input"
                     type="text"
-                    name="newItem"
-                    value={newItem}
+                    name="newTask"
+                    value={newTask}
                     onChange ={handleChanges}
                     />
             </div>
 
-            <button className = "add-new-item-button">
-                onClick = {() => {
-                    dispatch ({
-                        type: 'NEW_ITEM', 
-                        payload: newItem
-                    }); setNewItem ('') }} +
-                      Add new task  
-            </button>    
-
-           <ToDo />
-
+            <button type ='submit'>Add New Task</button>    
+            <br></br>
             <button 
                 onClick = {() => 
                 dispatch({ type: 'DELETE_COMPLETED' })}
